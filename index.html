@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shopzzy – Free Live Session | March 5th</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --blue-dark: #020c2e;
+      --blue-mid: #0a1a5c;
+      --blue-accent: #1a5fff;
+      --blue-glow: #3b82f6;
+      --cyan: #00d4ff;
+      --white: #ffffff;
+      --text-muted: #cadaf1;
+      --wa-green: #25D366;
+      --wa-dark: #128C7E;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--blue-dark);
+      color: var(--white);
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% -10%, rgba(2, 32, 102, 0.35) 0%, transparent 70%),
+        
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: radial-gradient(rgba(140, 180, 248, 0.12) 1px, transparent 1px);
+      background-size: 28px 28px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    nav {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 5px 5%;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      backdrop-filter: blur(8px);
+      background-color: rgb(206, 220, 244);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Syne', sans-serif;
+      font-size: 1rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+
+    .live-badge {
+      display: flex; align-items: center; gap: 7px;
+      background: rgba(255,60,60,0.15);
+      border: 1px solid rgba(255,60,60,0.4);
+      border-radius: 50px;
+      padding: 6px 14px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #ff6060;
+      letter-spacing: 0.5px;
+      animation: pulse-badge 2s ease-in-out infinite;
+    }
+
+    .live-badge::before {
+      content: '';
+      width: 8px; height: 8px;
+      background: #ff4040;
+      border-radius: 50%;
+      animation: blink 1.2s ease-in-out infinite;
+    }
+
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+    @keyframes pulse-badge { 0%,100%{box-shadow:0 0 0 rgba(255,60,60,0)} 50%{box-shadow:0 0 16px rgba(255,60,60,0.3)} }
+
+    .hero {
+      position: relative;
+      z-index: 1;
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 60px 5% 50px;
+      text-align: center;
+    }
+
+    .event-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(26,95,255,0.18);
+      border: 1px solid rgba(26,95,255,0.45);
+      border-radius: 50px;
+      padding: 8px 18px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--cyan);
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+      animation: fadeUp 0.6s ease both;
+    }
+
+    .event-chip .dot { width: 6px; height: 6px; background: var(--cyan); border-radius: 50%; }
+
+    h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2.2rem, 7vw, 4rem);
+      font-weight: 800;
+      line-height: 1.08;
+      letter-spacing: -1.5px;
+      margin-bottom: 18px;
+      animation: fadeUp 0.7s 0.1s ease both;
+    }
+
+    h1 .gradient-text {
+      background: white;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      color: var(--text-muted);
+      max-width: 560px;
+      margin: 0 auto 40px;
+      line-height: 1.65;
+      animation: fadeUp 0.7s 0.2s ease both;
+    }
+
+    .info-row {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 48px;
+      animation: fadeUp 0.7s 0.3s ease both;
+    }
+
+    .info-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 14px;
+      padding: 14px 22px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.88rem;
+      font-weight: 500;
+    }
+
+    .info-card .ic-icon {
+      width: 34px; height: 34px;
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+    }
+
+    .ic-date .ic-icon { background: rgba(0,212,255,0.15); }
+    .ic-time .ic-icon { background: rgba(255,180,0,0.15); }
+    .ic-free .ic-icon { background: rgba(50,220,120,0.15); }
+
+    .info-card strong { display: block; color: var(--white); font-size: 0.92rem; }
+    .info-card span { color: var(--text-muted); font-size: 0.78rem; }
+
+    .section {
+      position: relative; z-index: 1;
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 5% 20px;
+    }
+
+    .section-label {
+      text-align: center;
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--cyan);
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.5rem, 4vw, 2.2rem);
+      font-weight: 800;
+      text-align: center;
+      margin-bottom: 36px;
+      letter-spacing: -0.5px;
+    }
+
+    .points-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+    }
+
+    .point-card {
+      background: linear-gradient(135deg, rgba(26,95,255,0.1), rgba(0,212,255,0.05));
+      border: 1px solid rgba(26,95,255,0.25);
+      border-radius: 16px;
+      padding: 22px 20px;
+      transition: transform 0.25s ease, border-color 0.25s ease;
+    }
+
+    .point-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(0,212,255,0.5);
+    }
+
+    .point-emoji { font-size: 1.6rem; margin-bottom: 10px; }
+    .point-title { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; margin-bottom: 6px; }
+    .point-desc { font-size: 0.84rem; color: var(--text-muted); line-height: 1.55; }
+
+  
+    .cta-section {
+      position: relative; z-index: 1;
+      text-align: center;
+      padding: 0px 5% 50px;
+    }
+
+    .cta-card {
+      max-width: 800px;
+      margin: 0 auto;
+      background: linear-gradient(135deg, rgba(26,95,255,0.2), rgba(0,212,255,0.08));
+      border: 1px solid rgba(0,212,255,0.3);
+      border-radius: 24px;
+      padding: 48px 36px;
+    }
+
+    .cta-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.4rem, 4vw, 2rem);
+      font-weight: 800;
+      margin-bottom: 10px;
+      letter-spacing: -0.5px;
+    }
+
+    .cta-sub {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      margin-bottom: 32px;
+      line-height: 1.6;
+    }
+
+    .wa-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      background: linear-gradient(135deg, #0f9d43, #128C7E);
+      color: #fff;
+      font-family: 'Syne', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      text-decoration: none;
+      border-radius: 50px;
+      padding: 18px 38px;
+      letter-spacing: 0.3px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .wa-btn::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent);
+      border-radius: inherit;
+    }
+
+    .wa-btn:hover {
+      transform: translateY(-3px) scale(1.03);
+     
+    }
+
+    .wa-btn:active { transform: scale(0.98); }
+
+    .wa-icon {
+      width: 28px; height: 28px;
+      flex-shrink: 0;
+    }
+
+    .free-label {
+      display: inline-block;
+      background: rgba(50,220,120,0.15);
+      border: 1px solid rgba(50,220,120,0.3);
+      color: #32dc78;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      border-radius: 50px;
+      padding: 4px 12px;
+      margin-bottom: 20px;
+    }
+
+    footer {
+      position: relative; z-index: 1;
+      text-align: center;
+      padding: 20px 5% 36px;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    footer a { color: var(--cyan); text-decoration: none; }
+    footer strong { color: var(--white); }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .divider {
+      max-width: 860px; margin: 0 auto 48px;
+      padding: 0 5%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(26,95,255,0.35), transparent);
+    }
+
+    .countdown-row {
+      display: flex; gap: 12px; justify-content: center;
+      margin-bottom: 44px;
+      animation: fadeUp 0.7s 0.35s ease both;
+    }
+
+    .cd-box {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 14px 18px;
+      min-width: 68px;
+      text-align: center;
+    }
+
+    .cd-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 800;
+      line-height: 1;
+      color: var(--white);
+    }
+
+    .cd-label {
+      font-size: 0.65rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    @media (max-width: 600px) {
+      nav { padding: 10px 4%; }
+      .logo { font-size: 1rem; }
+     
+      .hero { padding: 44px 4% 36px; }
+      .info-card { flex: 1 1 calc(50% - 7px); }
+      .cta-card { padding: 36px 22px; }
+      .wa-btn { font-size: 0.95rem; padding: 16px 28px; }
+      .cd-box { min-width: 58px; padding: 10px 12px; }
+      .cd-num { font-size: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">
+   <img src="https://myshopzzy.com/_next/static/media/logo.1b9100be.svg" alt="logo">
+  </div>
+  <div class="live-badge">LIVE EVENT</div>
+</nav>
+
+<section class="hero">
+  <div class="event-chip">
+    <div class="dot"></div>
+    Free Live Session · March 5th, 7:00 PM
+  </div>
+
+  <h1>
+    <span class="gradient-text">Real Brands<br>Don't Sell in DMs.</span>
+  </h1>
+
+  <p class="subtitle">
+    They build systems. They own stores. They share one link.<br>
+    Learn how to set up yours - live, free, and in under an hour.
+  </p>
+   
+  <p style="padding-bottom:10px">Live Starts In</p>
+  <div class="countdown-row">
+    <div class="cd-box"><div class="cd-num" id="cd-h">00</div><div class="cd-label">Hours</div></div>
+    <div class="cd-box"><div class="cd-num" id="cd-m">00</div><div class="cd-label">Mins</div></div>
+    <div class="cd-box"><div class="cd-num" id="cd-s">00</div><div class="cd-label">Secs</div></div>
+  </div>
+
+  <div class="info-row">
+    <div class="info-card ic-date">
+      <div class="ic-icon">📅</div>
+      <div><strong>March 5th, 2025</strong><span>Live Session Date</span></div>
+    </div>
+    <div class="info-card ic-time">
+      <div class="ic-icon">🕖</div>
+      <div><strong>7:00 PM IST</strong><span>India Standard Time</span></div>
+    </div>
+    <div class="info-card ic-free">
+      <div class="ic-icon">🎁</div>
+      <div><strong>100% Free</strong><span>Open to All Indian Sellers</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-label">What you'll learn</div>
+  <div class="section-title">Everything to Launch Your Store</div>
+  <div class="points-grid">
+    <div class="point-card">
+      <div class="point-emoji">🏪</div>
+      <div class="point-title">Create Your Online Store</div>
+      <div class="point-desc">Build a professional store in minutes — no coding, no technical skills needed.</div>
+    </div>
+    <div class="point-card">
+      <div class="point-emoji">📦</div>
+      <div class="point-title">List & Sell Products</div>
+      <div class="point-desc">Add your products, set prices, and start receiving orders the same day.</div>
+    </div>
+    <div class="point-card">
+      <div class="point-emoji">🔗</div>
+      <div class="point-title">Share One Link</div>
+      <div class="point-desc">Get a shareable store link — send it anywhere: WhatsApp, Instagram, anywhere.</div>
+    </div>
+    <div class="point-card">
+      <div class="point-emoji">🚀</div>
+      <div class="point-title">Grow Your Business</div>
+      <div class="point-desc">Tools and tips for small businesses to scale without the big-brand budget.</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+
+<section class="cta-section">
+  <div class="cta-card">
+    <div class="free-label">✦ Free to Join</div>
+    <div class="cta-title">Reserve Your Spot Now</div>
+    <p class="cta-sub">
+      Join our WhatsApp group to get the live link, reminders,<br>
+      and a chance to ask your questions directly.
+    </p>
+    <a href="https://chat.whatsapp.com/GkrtkzIP8qR4438dXs5qjo?mode=hq1tcli" target="_blank" rel="noopener" class="wa-btn">
+      <svg class="wa-icon" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+      </svg>
+      Join WhatsApp Group - It's Free
+    </a>
+    <p style="margin-top:16px; font-size:0.78rem; color:var(--text-muted);">
+      Only for Indian sellers · Limited spots · March 5th @ 7 PM IST
+    </p>
+  </div>
+</section>
+
+<footer>
+  <p><strong>Shopzzy</strong> - Make It Eazy &nbsp;·&nbsp; <a href="https://instagram.com/myshopzzyofficial" target="_blank">@myshopzzyofficial</a></p>
+  <p style="margin-top:6px;">© 2025 Shopzzy. All rights reserved.</p>
+</footer>
+
+<script>
+  // March 5, 2026 – 7:00 PM IST
+  const target = new Date('2026-03-05T19:00:00+05:30').getTime();
+
+  function updateCountdown() {
+    const now = Date.now();
+    const diff = target - now;
+
+    if (diff <= 0) {
+      document.getElementById('cd-h').textContent = '00';
+      document.getElementById('cd-m').textContent = '00';
+      document.getElementById('cd-s').textContent = '00';
+      return;
+    }
+
+    const totalHours = Math.floor(diff / (1000 * 60 * 60));
+    const minutes = Math.floor((diff / (1000 * 60)) % 60);
+    const seconds = Math.floor((diff / 1000) % 60);
+
+    document.getElementById('cd-h').textContent = String(totalHours).padStart(2,'0');
+    document.getElementById('cd-m').textContent = String(minutes).padStart(2,'0');
+    document.getElementById('cd-s').textContent = String(seconds).padStart(2,'0');
+  }
+
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+</script>
+</body>
+</html>
